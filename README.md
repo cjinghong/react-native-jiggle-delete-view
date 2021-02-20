@@ -3,7 +3,7 @@
 Long press on a view to enter jiggle and delete mode, similar to deleting iOS apps
 
 ## Demo
-![react-native-jiggle-delete-view](demo.gif)
+<img src="https://i.imgur.com/ukE40IM.gif" height="500" alt="react-native-jiggle-delete-view"/>
 
 ## Installation
 
