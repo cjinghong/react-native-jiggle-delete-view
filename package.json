@@ -1,6 +1,6 @@
 {
   "name": "react-native-jiggle-delete-view",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Long press on a view to enter jiggle and delete mode, similar to deleting iOS apps",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
