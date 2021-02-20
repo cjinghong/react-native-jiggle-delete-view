@@ -10,6 +10,10 @@ Long press on a view to enter jiggle and delete mode, similar to deleting iOS ap
 ```sh
 npm install react-native-jiggle-delete-view
 ```
+or
+```sh
+yarn add react-native-jiggle-delete-view
+```
 
 ## Usage
 First import with
