@@ -3,7 +3,7 @@
 Long press on a view to enter jiggle and delete mode, similar to deleting iOS apps
 
 ## Demo
-<img src="https://i.imgur.com/ukE40IM.gif" height="500" alt="react-native-jiggle-delete-view"/>
+<img src="https://i.imgur.com/0ry09Yd.gif" height="500" alt="react-native-jiggle-delete-view"/>
 
 ## Installation
 
@@ -20,13 +20,13 @@ First import with
 
 `import JiggleDeleteView from "react-native-jiggle-delete-view";`
 
-Then, wrap the views that you want to enable jiggle delete with `JiggleDeleteView`, and provide the props `deleting` and `onDelete`.
+Then, wrap the views that you want to enable jiggle delete with `JiggleDeleteView`, and provide the props `showDeleteJiggle` and `onDelete`.
 
 ```js
 <JiggleDeleteView
-	deleting={deleting}
+	showDeleteJiggle={showDeleteJiggle}
 	onDelete={() => {
-		deleteItem(index);
+		// Delete item
 	}}
 >
 	<MyCustomView>
@@ -35,21 +35,21 @@ Then, wrap the views that you want to enable jiggle delete with `JiggleDeleteVie
 </JiggleDeleteView>
 ```
 
-A common usage is to wrap `JiggleDeleteView` with a `TouchableOpacity` that sets `deleting` to true on long press. Check the example app for usage inside a `FlatList`.
+A common usage is to wrap `JiggleDeleteView` with a `TouchableOpacity` that sets `showDeleteJiggle` to true on long press. Check the example app for usage inside a `FlatList`.
 ```js
 import JiggleDeleteView from "react-native-jiggle-delete-view";
 
 // ...
-const [deleting, setDeleting] = React.useState(false);
+const [showDeleteJiggle, setShowDeleteJiggle] = React.useState(false);
 
 // ...
 <TouchableOpacity
 	onLongPress={() => {
-		setDeleting(!deleting);
+		setDeleting(!showDeleteJiggle);
 	}}
 >
 	<JiggleDeleteView
-		deleting={deleting}
+		showDeleteJiggle={showDeleteJiggle}
 		onDelete={() => {
 			deleteItem(index);
 		}}
