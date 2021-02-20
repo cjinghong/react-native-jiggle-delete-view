@@ -4,9 +4,9 @@ import * as Animatable from 'react-native-animatable';
 
 interface DeletableViewProps {
   children: JSX.Element;
-  deleting: Boolean;
+  showDeleteJiggle: Boolean;
   onDelete: () => void;
-  disableDeletingAnimation?: boolean;
+  showDeletingAnimation?: boolean;
 }
 
 const deleteZoomoutAnimDuration = 300;
@@ -28,9 +28,9 @@ const jiggle: any = {
 // Tap and hold to enter delete mode
 const JiggleDeleteView: React.FC<DeletableViewProps> = ({
   children,
-  deleting,
+  showDeleteJiggle,
   onDelete,
-  disableDeletingAnimation,
+  showDeletingAnimation,
 }) => {
   const [delay] = useState((Math.random() + 1) * 10);
   const [nonce, setNonce] = useState(0);
@@ -39,33 +39,31 @@ const JiggleDeleteView: React.FC<DeletableViewProps> = ({
   const viewRef = useRef<any>();
 
   useEffect(() => {
-    if (!deleting) {
+    if (!showDeleteJiggle) {
       viewRef.current?.stopAnimation();
     } else {
       setNonce(nonce + 1);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deleting]);
+  }, [showDeleteJiggle]);
 
   const onDeletePress = () => {
-    // If delete animation disabled, just call onDelete
-    if (disableDeletingAnimation) {
+    if (showDeletingAnimation) {
+      setIsDeleted(true);
+      viewRef.current?.animate('zoomOut').then(() => {
+        setTimeout(() => {
+          onDelete();
+        }, deleteZoomoutAnimDuration - 200);
+      });
+    } else {
       onDelete();
-      return;
     }
-
-    setIsDeleted(true);
-    viewRef.current?.animate('zoomOut').then(() => {
-      setTimeout(() => {
-        onDelete();
-      }, deleteZoomoutAnimDuration - 200);
-    });
   };
 
   return (
     <View>
-      {deleting && !deleted && (
+      {showDeleteJiggle && !deleted && (
         <TouchableOpacity
           onPress={onDeletePress}
           style={styles.deleteButtonContainer}

@@ -7,24 +7,30 @@ import {
   FlatList,
   SafeAreaView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import JiggleDeleteView from 'react-native-jiggle-delete-view';
 
 type Fruit = {
   name: string;
   color: string;
+  prompt?: boolean;
 };
 const INITIAL_ITEMS: Fruit[] = [
   { name: 'Apple', color: '#DB282C' },
   { name: 'Orange', color: '#FFB238' },
   { name: 'Banana', color: '#FFDA87' },
   { name: 'Durian', color: '#B6E04B' },
-  { name: 'Grapes', color: '#1939B7' },
+  {
+    name: 'This fruit will ask to delete',
+    color: '#1939B7',
+    prompt: true,
+  },
   { name: 'Strawberry', color: '#FF7F69' },
 ];
 
 export default function App() {
-  const [deleting, setDeleting] = React.useState(false);
+  const [showDeleteJiggle, setShowDeleteJiggle] = React.useState(false);
   const [items, setItems] = React.useState([...INITIAL_ITEMS]);
 
   const deleteItem = (index: number) => {
@@ -38,25 +44,49 @@ export default function App() {
 
   React.useEffect(() => {
     if (!items.length) {
-      setDeleting(false);
+      setShowDeleteJiggle(false);
     }
   }, [items]);
 
   const renderItem = ({ item, index }: { item: Fruit; index: number }) => {
+    const { name, color, prompt } = item;
     return (
       <TouchableOpacity
         onLongPress={() => {
-          setDeleting(!deleting);
+          setShowDeleteJiggle(!showDeleteJiggle);
         }}
         style={styles.cellContainer}
       >
         <JiggleDeleteView
-          deleting={deleting}
-          onDelete={() => {
-            deleteItem(index);
-          }}
+          showDeleteJiggle={showDeleteJiggle}
+          showDeletingAnimation={prompt ? false : true}
+          onDelete={
+            prompt
+              ? () => {
+                  Alert.alert(
+                    'Confirm delete',
+                    `Are you sure you want to delete "${name}"`,
+                    [
+                      {
+                        text: 'OK',
+                        onPress: () => {
+                          deleteItem(index);
+                        },
+                      },
+                      {
+                        text: 'Cancel',
+                        style: 'cancel',
+                        onPress: () => {},
+                      },
+                    ]
+                  );
+                }
+              : () => {
+                  deleteItem(index);
+                }
+          }
         >
-          <View style={[styles.cell, { backgroundColor: item.color }]}>
+          <View style={[styles.cell, { backgroundColor: color }]}>
             <Text style={styles.text}>{item.name}</Text>
           </View>
         </JiggleDeleteView>

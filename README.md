@@ -65,9 +65,9 @@ const [deleting, setDeleting] = React.useState(false);
 | **Prop**   | **Description** | **Default** | **Required** |
 |------------|-------------|--------------|---|
 | `children` | Any nested views. This is required.  | *None*      | Required  |
-| `deleting` | A boolean that determines if the view is being deleted. When sets to true, `JiggleDeleteView` will start jiggling, and a delete button will show. | `false` | Optional  |
+| `showDeleteJiggle` | A boolean that determines if the view is being deleted. When sets to true, `JiggleDeleteView` will start jiggling, and a delete button will show. | `false` | Optional  |
 | `onDelete` | A function that gets triggered when the delete button is pressed. | *None* | Required |
-| `disableDeletingAnimation` | A boolean that determines whether to disable the zoom out animation as the view is being removed. If sets to `false`, there will be no animation when delete button is pressed. | `true` | Optional |
+| `showDeletingAnimation` | A boolean that determines whether to show zoom out animation when delete button is pressed. | `false` | Optional |
 
 
 ## Contributing
