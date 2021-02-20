@@ -73,16 +73,10 @@ export default function App() {
           contentContainerStyle={styles.flatListContainer}
           keyExtractor={(item) => item.name}
           ListHeaderComponent={
-            <>
-              <Text style={styles.subtitle}>
-                Long press on any of the views to enter "Jiggle Mode". Long
-                press on the apps again to exit "Jiggle Mode."
-              </Text>
-              <Text style={styles.subtitle}>
-                You could also exit through your own button, just set "deleting"
-                to "false" to exit.
-              </Text>
-            </>
+            <Text style={styles.subtitle}>
+              Long press on any of the views to enter "Jiggle Mode". Long press
+              on the apps again to exit "Jiggle Mode."
+            </Text>
           }
           ListEmptyComponent={
             <View style={styles.emptyContainer}>

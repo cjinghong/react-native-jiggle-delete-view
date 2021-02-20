@@ -34,7 +34,12 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "jiggle",
+    "delete",
+    "animation",
+    "wiggle",
+    "shake"
   ],
   "repository": "https://github.com/cjinghong/react-native-jiggle-delete-view",
   "author": "Chan Jing Hong <jinghongchan@gmail.com> (https://github.com/cjinghong)",
